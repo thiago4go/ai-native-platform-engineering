@@ -2,22 +2,32 @@
 
 This repository demonstrates the control loop for AI-native platform engineering.
 
-```text
-Cluster / platform side
-  Platform catalog / portal
-  Skill registry + policy
-  Central agentgateway control plane
-  Eval + telemetry + evidence
-             |
-             | route/policy pushed to dev edge
-             v
-Developer device / dev edge
-  Claude Code
-  Demo MCP server
-  On-device agentgateway :4010
-             |
-             v
-  Model backend
+```mermaid
+flowchart TB
+    subgraph cluster["Cluster / Platform Side"]
+        catalog["Platform catalog / portal"]
+        skills["Skill registry + policy"]
+        control["Central agentgateway control plane"]
+        evals["Eval"]
+        telemetry["Telemetry + evidence"]
+    end
+
+    subgraph device["Developer Device / Dev Edge"]
+        claude["Claude Code"]
+        mcp["Demo MCP server"]
+        edge["On-device agentgateway :4010"]
+    end
+
+    backend["Model backend"]
+
+    catalog --> skills
+    skills --> control
+    control -- "route / policy" --> edge
+    claude -- "MCP calls" --> mcp
+    claude -- "model traffic" --> edge
+    edge --> backend
+    mcp --> evals
+    mcp --> telemetry
 ```
 
 ## Components
@@ -37,17 +47,21 @@ Developer device / dev edge
 
 The default `./scripts/run-demo.sh` mode is a local simulation of the same contracts:
 
-```text
-JSON catalog -> SKILL.md -> local MCP server -> route proof JSON -> evidence JSONL
+```mermaid
+flowchart LR
+    catalog["JSON catalog"] --> skill["SKILL.md"]
+    skill --> mcp["Local MCP server"]
+    mcp --> route["Route proof JSON"]
+    route --> evidence["Evidence JSONL"]
 ```
 
 The full topology replaces the route proof with a real gateway path:
 
-```text
-Claude Code -> on-device agentgateway :4010 -> model backend
-                       ^
-                       |
-        route/policy from cluster-side control plane
+```mermaid
+flowchart LR
+    control["Cluster-side control plane"] -- "route / policy" --> edge["On-device agentgateway :4010"]
+    claude["Claude Code"] --> edge
+    edge --> backend["Model backend"]
 ```
 
 This split matters because it lets the platform own route intent and evidence while still letting a developer run Claude Code locally.

@@ -4,23 +4,32 @@ The standalone demo runs anywhere. The full talk architecture adds a cluster/pla
 
 ## Architecture
 
-```text
-Cluster / platform side
-  [Platform catalog / portal]
-  [Skill registry + policy]
-  [Central agentgateway control plane]
-  [Eval service]
-  [Telemetry + evidence store]
-             |
-             | route and policy pushed to dev edge
-             v
-Developer device / dev edge
-  [Claude Code]
-  [Demo MCP server or remote platform MCP]
-  [on-device agentgateway :4010]
-             |
-             v
-  [Model backend]
+```mermaid
+flowchart TB
+    subgraph cluster["Cluster / Platform Side"]
+        catalog["Platform catalog / portal"]
+        skillRegistry["Skill registry + policy"]
+        centralGateway["Central agentgateway control plane"]
+        evals["Eval service"]
+        evidence["Telemetry + evidence store"]
+    end
+
+    subgraph device["Developer Device / Dev Edge"]
+        claude["Claude Code"]
+        mcp["Demo MCP server or remote platform MCP"]
+        edgeGateway["On-device agentgateway :4010"]
+    end
+
+    backend["Model backend"]
+
+    catalog --> skillRegistry
+    skillRegistry --> centralGateway
+    centralGateway -- "route and policy" --> edgeGateway
+    claude -- "MCP calls" --> mcp
+    claude -- "model traffic" --> edgeGateway
+    edgeGateway --> backend
+    mcp --> evals
+    mcp --> evidence
 ```
 
 ## What Runs Where
@@ -100,4 +109,3 @@ A complete run should prove:
 - token/request telemetry was visible
 - evidence was written
 - a human or team remained accountable
-

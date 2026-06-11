@@ -10,14 +10,14 @@ It also documents the full talk topology: a cluster-side platform/control-plane 
 
 The demo shows one platform action:
 
-```text
-Platform catalog
-  -> SKILL.md procedure
-  -> MCP tools
-  -> model route proof
-  -> eval gate
-  -> evidence JSON + ledger
-  -> replay
+```mermaid
+flowchart LR
+    catalog["Platform catalog"] --> skill["SKILL.md procedure"]
+    skill --> mcp["MCP tools"]
+    mcp --> route["Model route proof"]
+    route --> eval["Eval gate"]
+    eval --> evidence["Evidence JSON + ledger"]
+    evidence --> replay["Replay"]
 ```
 
 Default mode runs fully local and deterministic. It uses a local MCP server and creates real evidence files on disk. Optional live mode lets you connect Claude Code and your own model gateway.
@@ -33,22 +33,30 @@ The standalone demo keeps the same contracts but replaces the real cluster/data-
 
 ## Full Talk Topology
 
-```text
-Cluster / platform side
-  [Platform catalog / portal]
-  [Skill registry + policies]
-  [Central agentgateway control plane]
-  [Eval + telemetry + evidence systems]
-             |
-             | route/policy pushed to dev edge
-             v
-Developer device / dev edge
-  [Claude Code]
-  [Demo MCP server]
-  [on-device agentgateway :4010]
-             |
-             v
-  [Model backend]
+```mermaid
+flowchart TB
+    subgraph cluster["Cluster / Platform Side"]
+        catalog["Platform catalog / portal"]
+        skills["Skill registry + policies"]
+        control["Central agentgateway control plane"]
+        evals["Eval + telemetry + evidence systems"]
+    end
+
+    subgraph device["Developer Device / Dev Edge"]
+        claude["Claude Code"]
+        mcp["Demo MCP server"]
+        edge["On-device agentgateway :4010"]
+    end
+
+    backend["Model backend"]
+
+    catalog --> skills
+    skills --> control
+    control -- "route / policy" --> edge
+    claude -- "MCP calls" --> mcp
+    claude -- "model traffic" --> edge
+    edge --> backend
+    mcp -- "evidence" --> evals
 ```
 
 In the talk, the important split is:
@@ -119,6 +127,7 @@ See [docs/live-claude-code.md](docs/live-claude-code.md).
 
 For the full cluster + device architecture, see [docs/full-topology.md](docs/full-topology.md).
 For the demo MCP tools, see [docs/demo-mcp.md](docs/demo-mcp.md).
+For the visual explanation from the talk, see [docs/diagrams.md](docs/diagrams.md).
 
 ## Repository Layout
 
@@ -133,6 +142,7 @@ docs/architecture.md             architecture notes
 docs/build-your-own.md           how to adapt the pattern
 docs/full-topology.md            cluster + device topology
 docs/demo-mcp.md                 MCP tool contract and test calls
+docs/diagrams.md                 Mermaid diagrams for the talk and demo
 harness/runs/                    generated run artifacts
 ```
 
