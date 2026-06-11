@@ -1,0 +1,67 @@
+{
+  "project": {
+    "namespace": "demo",
+    "name": "governed-incident-assistant",
+    "displayName": "Governed Incident Assistant",
+    "description": "A sample AI capability governed by skill, MCP tools, model routing, evals, telemetry, evidence, and human approval."
+  },
+  "component": {
+    "name": "governed-incident-assistant",
+    "type": "ai-capability",
+    "runtime": "Claude Code or deterministic local runner",
+    "environment": "local-demo"
+  },
+  "capability": {
+    "name": "governed-incident-assistant",
+    "owner": "Maya Chen",
+    "accountableOwner": "Demo Owner",
+    "agent": "ai-platform-publisher",
+    "autonomyCeiling": "L3",
+    "status": "ready-for-demo",
+    "humanApprovalPolicy": "required for material or production-impacting change"
+  },
+  "skill": {
+    "name": "publish-governed-incident-assistant",
+    "path": "skills/publish-governed-incident-assistant/SKILL.md",
+    "purpose": "Publish and explain a governed AI capability through the AI-native platform control loop.",
+    "allowedTools": [
+      "platform.get_context",
+      "platform.get_eval_results",
+      "platform.record_evidence"
+    ],
+    "decisionOptions": [
+      "promote_for_demo",
+      "needs_human_approval",
+      "blocked"
+    ]
+  },
+  "gateway": {
+    "controller": "local-route-proof",
+    "enrollment": "standalone",
+    "gateway": "local-dev/demo-gateway",
+    "route": "local-dev/claude-code-llm",
+    "backend": "local-dev/claude-haiku",
+    "baseUrl": "http://127.0.0.1:4010",
+    "model": "claude-haiku"
+  },
+  "eval": {
+    "suite": "governed-ai-capability-smoke",
+    "passed": true,
+    "score": 0.95,
+    "failures": [],
+    "gates": [
+      "schema",
+      "secret-detection",
+      "tool-authorization",
+      "uncertainty",
+      "escalation"
+    ]
+  },
+  "evidence": {
+    "recordId": "ev-demo-governed-incident-assistant",
+    "required": true,
+    "verdict": "approved_for_demo",
+    "liabilityBoundary": "Agents execute delegated workflow steps. Humans and organizations own responsibility, approval, risk acceptance, and consequences."
+  }
+}
+

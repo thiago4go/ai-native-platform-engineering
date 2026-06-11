@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "ai-native-platform-demo": {
+      "command": "node",
+      "args": ["${DEMO_ROOT}/mcp/platform-context-server.mjs"],
+      "env": {
+        "DEMO_ROOT": "${DEMO_ROOT}",
+        "MCP_TRACE_FILE": "${MCP_TRACE_FILE}",
+        "AI_MODEL_ROUTE_NAME": "${AI_MODEL_ROUTE_NAME}",
+        "AI_MODEL_BACKEND": "${AI_MODEL_BACKEND}",
+        "ANTHROPIC_BASE_URL": "${ANTHROPIC_BASE_URL}"
+      }
+    }
+  }
+}
+

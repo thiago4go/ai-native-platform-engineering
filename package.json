@@ -1,0 +1,13 @@
+{
+  "name": "ai-native-platform-engineering",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "demo": "./scripts/run-demo.sh",
+    "replay": "./scripts/replay-evidence.sh",
+    "check": "node --check mcp/platform-context-server.mjs && bash -n scripts/*.sh"
+  },
+  "license": "MIT"
+}
+
