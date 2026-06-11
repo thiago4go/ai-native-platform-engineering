@@ -2,6 +2,33 @@
 
 Use this repo as a template for your own AI-native platform demo.
 
+## First 90 Days
+
+Do not start with a disconnected AI experiment. Start with one platform workflow that teams already care about and make it a governed platform product.
+
+Good candidates:
+
+- incident triage
+- service onboarding
+- production readiness review
+- dependency upgrades
+- compliance evidence collection
+
+Build the smallest useful AI-native platform loop around it:
+
+```text
+1. Catalog the capability.
+2. Write the SKILL.md or equivalent procedure.
+3. Define the allowed tool contract.
+4. Route model traffic through a governed path.
+5. Add one eval gate.
+6. Emit telemetry.
+7. Record replayable evidence.
+8. Name the accountable human or team.
+```
+
+The goal is not to prove that an agent can do something impressive once. The goal is to prove the platform can make agentic work repeatable, observable, and governable.
+
 ## 1. Change The Capability
 
 Edit:
@@ -118,3 +145,35 @@ evidence records what happened
 ```
 
 See [full-topology.md](full-topology.md).
+
+## 7. Standardize The Right Things
+
+The first capability every enterprise should standardize is the agent tool contract. Whether you use MCP or another interface, the platform needs a clear way to say:
+
+```text
+this agent can call these tools
+with this identity
+under this policy
+through this model route
+with this evidence
+```
+
+Avoid two common traps:
+
+- treating the developer portal as the platform
+- giving agents broad tools and hoping prompts will create governance
+
+The portal is the front door. The platform is the engine. Agents should receive governed paths, not vague power.
+
+## 8. Measure The Control Loop
+
+A useful metric is evidence-covered execution:
+
+```text
+For important workflows, what percentage of agent-assisted actions have:
+skill + tools + route + eval + telemetry + evidence + accountable owner?
+```
+
+This metric is better than counting prompts, agents, or demos. It tells you whether AI-assisted work is becoming part of the platform operating model.
+
+Over the next year, platform teams will increasingly become the control plane for enterprise AI execution. The best teams will not only provide infrastructure. They will provide governed paths for humans and agents to work together safely.
