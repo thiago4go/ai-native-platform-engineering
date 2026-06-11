@@ -17,7 +17,7 @@ flowchart TB
     subgraph device["Developer Device / Dev Edge"]
         claude["Claude Code"]
         mcp["Demo MCP server or remote platform MCP"]
-        edgeGateway["On-device agentgateway :4010"]
+        edgeGateway["On-device agentgateway :<port>"]
     end
 
     backend["Model backend"]
@@ -40,7 +40,7 @@ flowchart TB
 | Skill | `skills/.../SKILL.md` | skill registry or repo-backed skill package |
 | MCP | `mcp/platform-context-server.mjs` | local demo MCP or remote platform MCP service |
 | Cluster agentgateway | documented only | route/control-plane owner in Kubernetes |
-| Device agentgateway | route proof JSON | local data plane on `127.0.0.1:4010` |
+| Device agentgateway | route proof JSON | local data plane on your chosen local port |
 | Telemetry | generated route metrics JSON | Prometheus/OTel/Grafana |
 | Evidence | JSON + JSONL ledger | audit log, GRC system, signed evidence store |
 
@@ -62,7 +62,8 @@ flowchart TB
 3. Put a gateway in front of model traffic on your device:
 
    ```bash
-   export ANTHROPIC_BASE_URL=http://127.0.0.1:4010
+   export YOUR_GATEWAY_PORT=<port-your-gateway-listens-on>
+   export ANTHROPIC_BASE_URL="http://127.0.0.1:${YOUR_GATEWAY_PORT}"
    export AI_MODEL_ROUTE_NAME=dev-edge/claude-code-llm
    export AI_MODEL_BACKEND=dev-edge/claude-haiku-anthropic
    ./scripts/run-claude-code-demo.sh
@@ -91,7 +92,8 @@ The local demo does not install this for you because clusters vary. Use [example
 The device/dev-edge gateway gives Claude Code a local Anthropic-compatible endpoint:
 
 ```bash
-export ANTHROPIC_BASE_URL=http://127.0.0.1:4010
+export YOUR_GATEWAY_PORT=<port-your-gateway-listens-on>
+export ANTHROPIC_BASE_URL="http://127.0.0.1:${YOUR_GATEWAY_PORT}"
 ```
 
 Claude Code stays local. Model traffic still flows through a governed route. That is the point of the device-side data plane.

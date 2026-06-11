@@ -36,7 +36,7 @@ architecture_map() {
   printf "         |                                  |-- platform.get_eval_results\n"
   printf "         |                                  '-- platform.record_evidence --> %s[Evidence JSON + ledger]%s\n" "${magenta}" "${reset}"
   printf "         v\n"
-  printf "    %s[on-device agentgateway :4010]%s ----> [Model backend]\n" "${yellow}" "${reset}"
+  printf "    %s[on-device agentgateway :<port>]%s ----> [Model backend]\n" "${yellow}" "${reset}"
   printf "\n  Standalone mode runs this topology locally with route/evidence artifacts.\n"
 }
 

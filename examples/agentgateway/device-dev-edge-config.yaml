@@ -1,11 +1,11 @@
 # Conceptual example only.
 # This represents the on-device/dev-edge data plane used by Claude Code.
 gateway:
-  name: thiago-claude-code
+  name: local-agentgateway
   namespace: dev-edge
   listen:
     address: 127.0.0.1
-    port: 4010
+    port: "${YOUR_GATEWAY_PORT}"
 
 routes:
   - name: dev-edge/claude-code-llm
@@ -23,4 +23,3 @@ backends:
     credentials:
       source: environment
       env: ANTHROPIC_API_KEY
-

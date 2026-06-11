@@ -15,7 +15,7 @@ flowchart TB
     subgraph device["Developer Device / Dev Edge"]
         claude["Claude Code"]
         mcp["Demo MCP server"]
-        edge["On-device agentgateway :4010"]
+        edge["On-device agentgateway :<port>"]
     end
 
     backend["Model backend"]
@@ -59,7 +59,7 @@ The full topology replaces the route proof with a real gateway path:
 
 ```mermaid
 flowchart LR
-    control["Cluster-side control plane"] -- "route / policy" --> edge["On-device agentgateway :4010"]
+    control["Cluster-side control plane"] -- "route / policy" --> edge["On-device agentgateway :<port>"]
     claude["Claude Code"] --> edge
     edge --> backend["Model backend"]
 ```

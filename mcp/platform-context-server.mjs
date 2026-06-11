@@ -207,7 +207,7 @@ async function handle(message) {
           route: routeName,
           backend: backendName,
           model: catalog.gateway.model,
-          baseUrl: process.env.ANTHROPIC_BASE_URL || catalog.gateway.baseUrl
+          baseUrl: process.env.ANTHROPIC_BASE_URL || catalog.gateway.baseUrl || "not-configured"
         }
       };
     } else if (name === "platform.get_eval_results") {
@@ -250,4 +250,3 @@ rl.on("line", async (line) => {
     }
   }
 });
-

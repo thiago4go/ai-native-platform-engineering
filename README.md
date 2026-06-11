@@ -45,7 +45,7 @@ flowchart TB
     subgraph device["Developer Device / Dev Edge"]
         claude["Claude Code"]
         mcp["Demo MCP server"]
-        edge["On-device agentgateway :4010"]
+        edge["On-device agentgateway :<port>"]
     end
 
     backend["Model backend"]
@@ -119,7 +119,8 @@ export ANTHROPIC_API_KEY=<your-anthropic-api-key>
 To route Claude Code through your own gateway, set:
 
 ```bash
-export ANTHROPIC_BASE_URL=http://127.0.0.1:4010
+export YOUR_GATEWAY_PORT=<port-your-gateway-listens-on>
+export ANTHROPIC_BASE_URL="http://127.0.0.1:${YOUR_GATEWAY_PORT}"
 ./scripts/run-claude-code-demo.sh
 ```
 

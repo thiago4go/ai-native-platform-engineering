@@ -28,7 +28,8 @@ platform.record_evidence
 If you have a model gateway, point Claude Code at it:
 
 ```bash
-export ANTHROPIC_BASE_URL=http://127.0.0.1:4010
+export YOUR_GATEWAY_PORT=<port-your-gateway-listens-on>
+export ANTHROPIC_BASE_URL="http://127.0.0.1:${YOUR_GATEWAY_PORT}"
 export AI_MODEL_ROUTE_NAME=dev-edge/claude-code-llm
 export AI_MODEL_BACKEND=dev-edge/claude-haiku-anthropic
 ./scripts/run-claude-code-demo.sh

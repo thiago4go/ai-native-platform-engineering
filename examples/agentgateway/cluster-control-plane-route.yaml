@@ -8,7 +8,7 @@ metadata:
 spec:
   owner: platform-team
   route: dev-edge/claude-code-llm
-  targetGateway: dev-edge/thiago-claude-code
+  targetGateway: dev-edge/local-agentgateway
   backendRef:
     name: claude-haiku-anthropic
     namespace: dev-edge
@@ -24,4 +24,3 @@ spec:
       requiredFor:
         - production-impacting-change
         - material-risk-change
-

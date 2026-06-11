@@ -41,7 +41,7 @@
     "gateway": "local-dev/demo-gateway",
     "route": "local-dev/claude-code-llm",
     "backend": "local-dev/claude-haiku",
-    "baseUrl": "http://127.0.0.1:4010",
+    "baseUrl": null,
     "model": "claude-haiku"
   },
   "eval": {
@@ -64,4 +64,3 @@
     "liabilityBoundary": "Agents execute delegated workflow steps. Humans and organizations own responsibility, approval, risk acceptance, and consequences."
   }
 }
-

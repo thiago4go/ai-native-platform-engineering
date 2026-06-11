@@ -104,7 +104,7 @@ Developer device/dev-edge side:
 
 - Claude Code
 - demo MCP server or remote platform MCP endpoint
-- on-device agentgateway listening on `127.0.0.1:4010`
+- on-device agentgateway listening on your chosen local port
 - model credentials routed through the gateway
 
 The important behavior is:

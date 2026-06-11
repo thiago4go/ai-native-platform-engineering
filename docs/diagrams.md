@@ -40,7 +40,7 @@ flowchart TB
     subgraph device["Developer Device / Dev Edge"]
         claude["Claude Code"]
         mcp["Demo MCP server"]
-        edgeGateway["On-device agentgateway :4010"]
+        edgeGateway["On-device agentgateway :<port>"]
     end
 
     backend["Model backend"]
@@ -142,4 +142,3 @@ flowchart LR
     localEval["Static eval JSON"] --> realEval["Eval service"]
     localEvidence["JSONL ledger"] --> realEvidence["Audit / GRC / signed evidence store"]
 ```
-
