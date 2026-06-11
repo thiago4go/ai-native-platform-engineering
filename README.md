@@ -127,6 +127,7 @@ See [docs/live-claude-code.md](docs/live-claude-code.md).
 For the full cluster + device architecture, see [docs/full-topology.md](docs/full-topology.md).
 For the demo MCP tools, see [docs/demo-mcp.md](docs/demo-mcp.md).
 For the visual explanation from the talk, see [docs/diagrams.md](docs/diagrams.md).
+For Thiago's panel Q&A notes from the talk, see [docs/panel-qa.md](docs/panel-qa.md).
 
 ## Repository Layout
 
@@ -142,6 +143,7 @@ docs/build-your-own.md           how to adapt the pattern
 docs/full-topology.md            cluster + device topology
 docs/demo-mcp.md                 MCP tool contract and test calls
 docs/diagrams.md                 Mermaid diagrams for the talk and demo
+docs/panel-qa.md                 speaker-ready panel Q&A notes
 harness/runs/                    generated run artifacts
 ```
 
