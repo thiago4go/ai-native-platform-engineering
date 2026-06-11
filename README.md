@@ -2,9 +2,7 @@
 
 Build and run the closing demo from the talk: a governed AI platform action with `SKILL.md`, scoped MCP tools, model-route proof, eval gates, telemetry, and replayable evidence.
 
-This audience version is intentionally standalone. It does not require a Kubernetes cluster, OpenChoreo install, VPN, Grafana, or private agentgateway setup.
-
-It also documents the full talk topology: a cluster-side platform/control-plane path plus an on-device/dev-edge model gateway used by Claude Code.
+The repo gives you a runnable local demo plus the full talk topology: a cluster-side platform/control-plane path and an on-device/dev-edge model gateway used by Claude Code.
 
 ## What You Will Run
 

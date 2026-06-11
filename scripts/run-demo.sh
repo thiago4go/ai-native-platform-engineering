@@ -42,7 +42,7 @@ architecture_map() {
 
 section "AI-Native Platform Engineering Demo"
 printf "This demo shows one governed AI platform action.\n"
-printf "It is local by default: no cluster, VPN, or private gateway required.\n"
+printf "It connects skill, MCP tools, model route proof, evals, telemetry, and evidence.\n"
 
 printf "\n%sWhat is set up%s\n" "${bold}" "${reset}"
 printf "  1. A governed capability catalog\n"
