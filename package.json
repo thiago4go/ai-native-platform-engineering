@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "demo": "./scripts/run-demo.sh",
+    "demo:interactive": "./scripts/run-interactive-demo.sh",
     "replay": "./scripts/replay-evidence.sh",
     "check": "node --check mcp/platform-context-server.mjs && bash -n scripts/*.sh"
   },
   "license": "MIT"
 }
-

@@ -80,6 +80,25 @@ cd ai-native-platform-engineering
 ./scripts/run-demo.sh
 ```
 
+For a presenter-style run that mirrors the talk flow with pauses, staged context, MCP trace, route proof, and replay:
+
+```bash
+./scripts/run-interactive-demo.sh
+```
+
+For recordings or non-interactive shells:
+
+```bash
+./scripts/run-interactive-demo.sh --auto
+```
+
+If you have a live agentgateway metrics endpoint, the interactive demo can show request and token deltas:
+
+```bash
+export AGENTGATEWAY_METRICS_URL=http://127.0.0.1:<metrics-port>/metrics
+./scripts/run-interactive-demo.sh
+```
+
 The demo creates evidence under:
 
 ```text
@@ -135,6 +154,7 @@ catalog/                         platform capability catalog
 skills/                          SKILL.md procedure
 mcp/                             local MCP server and Claude config template
 scripts/run-demo.sh              standalone audience demo
+scripts/run-interactive-demo.sh  presenter-style staged demo
 scripts/run-claude-code-demo.sh  optional live Claude Code demo
 scripts/replay-evidence.sh       replay latest evidence record
 docs/architecture.md             architecture notes
