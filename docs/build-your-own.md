@@ -88,3 +88,33 @@ The default demo is local. You can replace pieces gradually:
 | JSON eval | eval service |
 | JSONL evidence ledger | audit log, GRC system, or signed evidence store |
 
+## 6. Add The Cluster + Device Split
+
+To reproduce the talk topology, split responsibilities:
+
+Cluster/platform side:
+
+- service catalog or developer portal
+- skill registry
+- central route/control-plane config
+- eval service
+- telemetry and evidence store
+
+Developer device/dev-edge side:
+
+- Claude Code
+- demo MCP server or remote platform MCP endpoint
+- on-device agentgateway listening on `127.0.0.1:4010`
+- model credentials routed through the gateway
+
+The important behavior is:
+
+```text
+cluster owns route intent
+device runs agent runtime
+MCP scopes tools
+gateway carries model traffic
+evidence records what happened
+```
+
+See [full-topology.md](full-topology.md).

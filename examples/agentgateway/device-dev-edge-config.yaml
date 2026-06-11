@@ -1,0 +1,26 @@
+# Conceptual example only.
+# This represents the on-device/dev-edge data plane used by Claude Code.
+gateway:
+  name: thiago-claude-code
+  namespace: dev-edge
+  listen:
+    address: 127.0.0.1
+    port: 4010
+
+routes:
+  - name: dev-edge/claude-code-llm
+    match:
+      pathPrefix: /v1/messages
+    backend: dev-edge/claude-haiku-anthropic
+    telemetry:
+      requests: true
+      tokens: true
+
+backends:
+  - name: dev-edge/claude-haiku-anthropic
+    provider: anthropic
+    model: claude-haiku
+    credentials:
+      source: environment
+      env: ANTHROPIC_API_KEY
+

@@ -1,8 +1,10 @@
 # AI-Native Platform Engineering
 
-Build and run the closing demo from the talk: a governed AI platform action with a skill, scoped MCP tools, model-route proof, eval gates, telemetry, and replayable evidence.
+Build and run the closing demo from the talk: a governed AI platform action with `SKILL.md`, scoped MCP tools, model-route proof, eval gates, telemetry, and replayable evidence.
 
 This audience version is intentionally standalone. It does not require a Kubernetes cluster, OpenChoreo install, VPN, Grafana, or private agentgateway setup.
+
+It also documents the full talk topology: a cluster-side platform/control-plane path plus an on-device/dev-edge model gateway used by Claude Code.
 
 ## What You Will Run
 
@@ -19,6 +21,42 @@ Platform catalog
 ```
 
 Default mode runs fully local and deterministic. It uses a local MCP server and creates real evidence files on disk. Optional live mode lets you connect Claude Code and your own model gateway.
+
+## Two Ways To Use This Repo
+
+| Track | What it proves | Requirements |
+|---|---|---|
+| Standalone audience demo | The control loop: skill, MCP, route proof, eval, evidence, replay | Bash + Node.js |
+| Full topology | Cluster-owned route/control plane + on-device/dev-edge agentgateway for Claude Code | Kubernetes, agentgateway, Claude Code, model credentials |
+
+The standalone demo keeps the same contracts but replaces the real cluster/data-plane wiring with local artifacts so anyone can run it.
+
+## Full Talk Topology
+
+```text
+Cluster / platform side
+  [Platform catalog / portal]
+  [Skill registry + policies]
+  [Central agentgateway control plane]
+  [Eval + telemetry + evidence systems]
+             |
+             | route/policy pushed to dev edge
+             v
+Developer device / dev edge
+  [Claude Code]
+  [Demo MCP server]
+  [on-device agentgateway :4010]
+             |
+             v
+  [Model backend]
+```
+
+In the talk, the important split is:
+
+- The **cluster/platform side** owns capability state, policies, route intent, evals, telemetry, and evidence.
+- The **device/dev-edge side** is where Claude Code runs and sends model traffic through a local governed route.
+- `SKILL.md` tells the agent what procedure to follow.
+- The demo MCP server gives the agent scoped platform tools instead of raw infrastructure access.
 
 ## Quick Start
 
@@ -79,6 +117,9 @@ export ANTHROPIC_BASE_URL=http://127.0.0.1:4010
 
 See [docs/live-claude-code.md](docs/live-claude-code.md).
 
+For the full cluster + device architecture, see [docs/full-topology.md](docs/full-topology.md).
+For the demo MCP tools, see [docs/demo-mcp.md](docs/demo-mcp.md).
+
 ## Repository Layout
 
 ```text
@@ -90,6 +131,8 @@ scripts/run-claude-code-demo.sh  optional live Claude Code demo
 scripts/replay-evidence.sh       replay latest evidence record
 docs/architecture.md             architecture notes
 docs/build-your-own.md           how to adapt the pattern
+docs/full-topology.md            cluster + device topology
+docs/demo-mcp.md                 MCP tool contract and test calls
 harness/runs/                    generated run artifacts
 ```
 

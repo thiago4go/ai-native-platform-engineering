@@ -1,0 +1,27 @@
+# Conceptual example only.
+# Adapt this shape to your gateway/controller and cluster.
+apiVersion: gateway.ai.example/v1alpha1
+kind: ModelRoute
+metadata:
+  name: claude-code-llm
+  namespace: dev-edge
+spec:
+  owner: platform-team
+  route: dev-edge/claude-code-llm
+  targetGateway: dev-edge/thiago-claude-code
+  backendRef:
+    name: claude-haiku-anthropic
+    namespace: dev-edge
+  policy:
+    allowedModels:
+      - claude-haiku
+    telemetry:
+      requests: true
+      tokens: true
+    evidence:
+      required: true
+    humanApproval:
+      requiredFor:
+        - production-impacting-change
+        - material-risk-change
+
